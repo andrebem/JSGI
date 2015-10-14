@@ -10,12 +10,12 @@ import javax.swing.JPanel;
 
 
 
-public class JavaViewport extends JPanel implements KeyListener{
+public class JavaViewport extends JPanel implements KeyListener, Viewport {
 
 	private Graphics2D g2d;
 	private Window window;
 	private Ponto2D min, max;
-	ArrayList<ObjetoGrafico> objetos;
+	private ArrayList<Desenhavel> objetos;
 
 	public JavaViewport(float largura, float altura, Window w) {
 		this.setFocusable(true);
@@ -25,7 +25,7 @@ public class JavaViewport extends JPanel implements KeyListener{
 		this.window = w;
 		this.min = new Ponto2D(0,0);
 		this.max = new Ponto2D(largura,altura);
-		objetos = new ArrayList<ObjetoGrafico>();
+		objetos = new ArrayList<Desenhavel>();
 		
 		Linha2D linha = new Linha2D(new Ponto2D(-100,-100), new Ponto2D(100,100));
 		objetos.add(linha);
@@ -37,8 +37,8 @@ public class JavaViewport extends JPanel implements KeyListener{
 	    g2d.setColor(new Color(1.0f,0.0f,0.0f));
 	    this.g2d = g2d;
 
-	    for (ObjetoGrafico obj: objetos){
-	    	obj.desenhe(this.window, this);
+	    for (Desenhavel obj: objetos){
+	    	obj.desenhar(this.window, this);
 	    }
 	    
 	    this.g2d = null;
@@ -48,16 +48,20 @@ public class JavaViewport extends JPanel implements KeyListener{
 		super.paintComponent(g);
 	}
 	  
-	public static Ponto2D transformada(Ponto2D p, Window w, JavaViewport vp){
+	public Ponto2D getTransformada(Ponto2D p, Window w) {
 		//TODO implementar!
 		// O objeto "w" possui os dados da Window
-		// o objeto "vp" possui os dados da Viewport
+		// o objeto "this" possui os dados da Viewport
 		// o objeto "p" é o ponto a ser transformado (retorne um novo ponto).
 
 		return p;
 	}
 
-	public void desenhaLinha(Ponto2D p1, Ponto2D p2){
+	/* (non-Javadoc)
+	 * @see Viewport#desenharLinha(Ponto2D, Ponto2D)
+	 */
+	@Override
+	public void desenharLinha(Ponto2D p1, Ponto2D p2) {
 		g2d.draw(new Line2D.Double(new Point2D.Double(p1.getX(),p1.getY()), new Point2D.Double(p2.getX(),p2.getY())));
 	}
 
@@ -75,17 +79,17 @@ public class JavaViewport extends JPanel implements KeyListener{
 		frame.setVisible(true); 
 		frame.pack();
 
-		testaMatrizes();
+		testarMatrizes();
 	}
 	  
-	public static void testaMatrizes(){		
+	public static void testarMatrizes(){		
 		Matriz a = new Matriz(1,3);
 		Matriz b = new Matriz(3,1);
 		for (int i = 0; i < 3; i++){
 			a.set(0, i, 1);
 			b.set(i, 0, 2);
 		}
-		Matriz c = a.vezes(b);
+		Matriz c = a.multiplicar(b);
 		a.print();
 		System.out.println();
 		b.print();
@@ -94,10 +98,18 @@ public class JavaViewport extends JPanel implements KeyListener{
 		
 	}
 
+	/* (non-Javadoc)
+	 * @see Viewport#getMin()
+	 */
+	@Override
 	public Ponto2D getMin() {
 		return min;
 	}
 
+	/* (non-Javadoc)
+	 * @see Viewport#getMax()
+	 */
+	@Override
 	public Ponto2D getMax() {
 		return max;
 	}

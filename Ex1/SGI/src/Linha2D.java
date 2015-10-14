@@ -1,5 +1,5 @@
 
-public class Linha2D implements ObjetoGrafico {
+public class Linha2D implements Desenhavel {
 
 	private Ponto2D p1;
 	private Ponto2D p2;
@@ -10,11 +10,11 @@ public class Linha2D implements ObjetoGrafico {
 	}
 
 	@Override
-	public void desenhe(Window w, JavaViewport vp) {
-		Ponto2D newP1 = JavaViewport.transformada(this.p1, w, vp);
-		Ponto2D newP2 = JavaViewport.transformada(this.p2, w, vp);
+	public void desenhar(Window w, Viewport vp) {
+		Ponto2D newP1 = vp.getTransformada(this.p1, w);
+		Ponto2D newP2 = vp.getTransformada(this.p2, w);
 		
-		vp.desenhaLinha(newP1, newP2);
+		vp.desenharLinha(newP1, newP2);
 	}
 
 }
