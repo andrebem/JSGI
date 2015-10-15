@@ -28,11 +28,11 @@ public class Ponto2D {
 		m.set(0, 1, y);
 	}
 
-	public Ponto2D vezes(Matriz m2) {
+	public Ponto2D transformar(Matriz m2) {
 		if (m2.getNumLinhas()!=3 ||m2.getNumColunas()!=3){
 			throw new InvalidParameterException();
 		}
-		Matriz result = this.m.vezes(m2);
+		Matriz result = this.m.multiplicar(m2);
 		Ponto2D p = new Ponto2D(result.get(0, 0), result.get(0,1));
 		return p;
 	}

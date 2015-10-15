@@ -29,7 +29,7 @@ public class Matriz {
 		return elementos[i][j];
 	}
 	
-	public Matriz mais(Matriz B){
+	public Matriz somar(Matriz B){
 		Matriz C = new Matriz(numLinhas, numColunas);
 		for (int i = 0; i < numLinhas; i++){
 			for (int j = 0; j < numColunas; j++){
@@ -40,7 +40,7 @@ public class Matriz {
 		return C;
 	}
 
-	public Matriz vezes(Matriz B) {
+	public Matriz multiplicar(Matriz B) {
 		Matriz C = new Matriz(this.getNumLinhas(), B.getNumColunas());
 		for (int i = 0; i < C.getNumLinhas(); i++){
 			for (int j = 0; j < C.getNumColunas(); j++){	
@@ -55,7 +55,7 @@ public class Matriz {
 		return C;
 	}	
 	
-	public static Matriz identidade(int tamanho){
+	public static Matriz getIdentidade(int tamanho){
 		Matriz id = new Matriz(tamanho, tamanho);
 		for(int i = 0; i < tamanho; i++){
 			id.set(i, i, 1);
@@ -64,21 +64,21 @@ public class Matriz {
 		return id;
 	}
 	
-	public static Matriz translacao(double dx, double dy){
-		Matriz t = identidade(3);
+	public static Matriz getTranslacao(double dx, double dy){
+		Matriz t = getIdentidade(3);
 		t.set(2, 0, dx);
 		t.set(2, 1, dy);
 		return t;
 	}
 	
-	public static Matriz escalonamento(double sx, double sy) {
-		Matriz s = identidade(3);
+	public static Matriz getEscala(double sx, double sy) {
+		Matriz s = getIdentidade(3);
 		s.set(0, 0, sx);
 		s.set(1, 1, sy);
 		return s;
 	}	
 	
-	public static Matriz rotacao(double angulo) {
+	public static Matriz getRotacao(double angulo) {
 		//TODO!
 		return null;
 	}

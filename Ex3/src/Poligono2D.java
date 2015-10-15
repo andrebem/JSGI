@@ -1,18 +1,18 @@
 import java.util.ArrayList;
 
 
-public class Poligono2D implements ObjetoGrafico {
+public class Poligono2D implements Desenhavel {
 	private ArrayList<Ponto2D> pontos;
 
 	@Override
-	public void desenhe(Window w, JavaViewport vp) {
+	public void desenhar(Window w, Viewport vp) {
 		// TODO Auto-generated method stub
 
 	}
 
 	@Override
 
-	public void aplique(Matriz m) {
+	public void aplicar(Matriz m) {
 		// TODO Auto-generated method stub
 	}
 

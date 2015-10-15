@@ -8,14 +8,12 @@ import java.util.ArrayList;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
-
-
-public class JavaViewport extends JPanel implements KeyListener{
+public class JavaViewport extends JPanel implements KeyListener, Viewport{
 
 	private Graphics2D g2d;
 	private Window window;
 	private Ponto2D min, max;
-	ArrayList<ObjetoGrafico> objetos;
+	ArrayList<Desenhavel> objetos;
 	Linha2D linha;
 
 	public JavaViewport(float largura, float altura, Window w) {
@@ -26,7 +24,7 @@ public class JavaViewport extends JPanel implements KeyListener{
 		this.window = w;
 		this.min = new Ponto2D(0,0);
 		this.max = new Ponto2D(largura,altura);
-		objetos = new ArrayList<ObjetoGrafico>();
+		objetos = new ArrayList<Desenhavel>();
 		
 		linha = new Linha2D(new Ponto2D(-10,-10), new Ponto2D(10,10));
 		objetos.add(linha);
@@ -38,8 +36,8 @@ public class JavaViewport extends JPanel implements KeyListener{
 	    g2d.setColor(new Color(1.0f,0.0f,0.0f));
 	    this.g2d = g2d;
 
-	    for (ObjetoGrafico obj: objetos){
-	    	obj.desenhe(this.window, this);
+	    for (Desenhavel obj: objetos){
+	    	obj.desenhar(this.window, this);
 	    }
 	    
 	    this.g2d = null;
@@ -49,7 +47,7 @@ public class JavaViewport extends JPanel implements KeyListener{
 		super.paintComponent(g);
 	}
 	  
-	public static Ponto2D transformada(Ponto2D p, Window w, JavaViewport vp){
+	public static Ponto2D transformada(Ponto2D p, Window w, Viewport vp){
 		//TODO implementar!
 		// O objeto "w" possui os dados da Window
 		// o objeto "vp" possui os dados da Viewport
@@ -67,6 +65,10 @@ public class JavaViewport extends JPanel implements KeyListener{
 		return new Ponto2D(xvp,yvp);
 	}
 
+	/* (non-Javadoc)
+	 * @see Viewport#desenhaLinha(Ponto2D, Ponto2D)
+	 */
+	@Override
 	public void desenhaLinha(Ponto2D p1, Ponto2D p2){
 		g2d.draw(new Line2D.Double(new Point2D.Double(p1.getX(),p1.getY()), new Point2D.Double(p2.getX(),p2.getY())));
 	}
@@ -85,19 +87,27 @@ public class JavaViewport extends JPanel implements KeyListener{
 		frame.setVisible(true); 
 		frame.pack();
 
-		testaMatrizes();
+		testarMatrizes();
 	}
 	  
-	public static void testaMatrizes(){	
-		Matriz ida = Matriz.translacao(-3,2);
+	public static void testarMatrizes(){	
+		Matriz ida = Matriz.getTranslacao(-3,2);
 		Ponto2D p = new Ponto2D(1,5);
-		p.vezes(ida).print();
+		p.transformar(ida).print();
 	}
 
+	/* (non-Javadoc)
+	 * @see Viewport#getMin()
+	 */
+	@Override
 	public Ponto2D getMin() {
 		return min;
 	}
 
+	/* (non-Javadoc)
+	 * @see Viewport#getMax()
+	 */
+	@Override
 	public Ponto2D getMax() {
 		return max;
 	}
@@ -105,42 +115,40 @@ public class JavaViewport extends JPanel implements KeyListener{
 	@Override
 	public void keyTyped(KeyEvent e) {
 		// TODO Auto-generated method stub
-		
 	}
 
 	@Override
 	public void keyPressed(KeyEvent e) {
-		// TODO Auto-generated method stub
 		switch (e.getKeyCode()){
 		case KeyEvent.VK_UP: 
-			linha.aplique(Matriz.translacao(0,10));
+			linha.aplicar(Matriz.getTranslacao(0,10));
 			this.repaint();
 			break;
 		case KeyEvent.VK_DOWN: 
-			linha.aplique(Matriz.translacao(0,-10));
+			linha.aplicar(Matriz.getTranslacao(0,-10));
 			this.repaint();		
 			break;
 		case KeyEvent.VK_LEFT: 
-			escalone(linha,1.1);
+			escalonar(linha,1.1);
 			this.repaint();
 			break;
 		case KeyEvent.VK_RIGHT: 
-			escalone(linha,0.9);
+			escalonar(linha,0.9);
 			this.repaint();			
 			break;
 	}		
 	}
 
-	private void escalone(Linha2D linha2, double s) {
+	private void escalonar(Linha2D linha2, double s) {
 		//PASSO 1: Transladar do centro da linha
 		Ponto2D c = linha2.getCentro();
-		Matriz  ida = Matriz.translacao(-c.getX(), -c.getY());
+		Matriz  ida = Matriz.getTranslacao(-c.getX(), -c.getY());
 		//PASSO 2: Escalonamento
-		Matriz  esc = Matriz.escalonamento(s, s);
+		Matriz  esc = Matriz.getEscala(s, s);
 		//PASSO 3: Transladar de volta
-		Matriz  volta = Matriz.translacao(c.getX(), c.getY());
-		Matriz m = ida.vezes(esc).vezes(volta);
-		linha2.aplique(m);
+		Matriz  volta = Matriz.getTranslacao(c.getX(), c.getY());
+		Matriz m = ida.multiplicar(esc).multiplicar(volta);
+		linha2.aplicar(m);
 	}
 
 	@Override
