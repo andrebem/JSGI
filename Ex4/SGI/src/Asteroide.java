@@ -30,7 +30,7 @@ public class Asteroide extends Poligono2D {
 		Matriz total = Matriz.translacao(-c.getX(), -c.getY());
 		total = total.vezes(Matriz.rotacao(angulo));
 		total = total.vezes(Matriz.translacao(c.getX(), c.getY()));
-		this.aplique(total);
+		this.aplicar(total);
 		
 		dA = (Math.random()-0.5)*6;
 	}
@@ -42,7 +42,7 @@ public class Asteroide extends Poligono2D {
 		total = total.vezes(Matriz.rotacao(dA));
 		total = total.vezes(Matriz.translacao(c.getX(), c.getY()));
 		total = total.vezes(t);
-		this.aplique(total);
+		this.aplicar(total);
 	}
 	
 	

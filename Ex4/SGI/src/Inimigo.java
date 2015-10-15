@@ -1,6 +1,7 @@
 
 public class Inimigo extends Poligono2D {
-	Nave2D nave;
+	private Nave2D nave;
+	
 	public Inimigo(Ponto2D c, Nave2D nave){
 		this.nave = nave;
 		double f = 30.0;
@@ -27,7 +28,7 @@ public class Inimigo extends Poligono2D {
 		double dy = yTot/hip;
 		dx *= 3;
 		dy *= 3;
-		this.aplique(Matriz.translacao(dx, dy));
+		this.aplicar(Matriz.translacao(dx, dy));
 	}
 	
 }

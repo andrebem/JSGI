@@ -1,7 +1,7 @@
 import java.util.ArrayList;
 
 
-public class Poligono2D extends ObjetoGrafico {
+public class Poligono2D extends ObjetoDesenhavel {
 	protected ArrayList<Ponto2D> pontos;
 	
 	public Poligono2D(){
@@ -13,7 +13,7 @@ public class Poligono2D extends ObjetoGrafico {
 	}
 	
 	@Override
-	public void desenhe(Window w, JavaViewport vp) {
+	public void desenhar(Window w, Viewport vp) {
 		if (pontos.size()<2){
 			return;
 		}
@@ -24,12 +24,12 @@ public class Poligono2D extends ObjetoGrafico {
 			Ponto2D p2 = pontos.get((i+1)%pontos.size());
 
 			Linha2D l = new Linha2D(p1,p2);
-			l.desenhe(w, vp);
+			l.desenhar(w, vp);
 		}
 	}
 
 	@Override
-	public void aplique(Matriz m) {
+	public void aplicar(Matriz m) {
 		for (int i = 0; i < pontos.size(); ++i){
 			Ponto2D p = pontos.get(i).vezes(m);
 			pontos.set(i, p);

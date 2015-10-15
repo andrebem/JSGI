@@ -5,7 +5,7 @@ import java.util.ArrayList;
 public class Mundo {
 	Nave2D nave;
 	Inimigo inimigo;
-	ArrayList<ObjetoGrafico> objetos;
+	ArrayList<ObjetoDesenhavel> objetos;
 	ArrayList<Asteroide> asteroides;
 	
 	
@@ -17,7 +17,7 @@ public class Mundo {
 		Linha2D eixoY = new Linha2D(new Ponto2D(0,-500), new Ponto2D(0,500));
 		eixoX.setCor(Color.BLUE);
 		eixoY.setCor(Color.BLUE);
-		objetos = new ArrayList<ObjetoGrafico>();
+		objetos = new ArrayList<ObjetoDesenhavel>();
 		objetos.add(eixoX);
 		objetos.add(eixoY);
 		
@@ -36,14 +36,14 @@ public class Mundo {
 		inimigo = new Inimigo(new Ponto2D(200,-200),nave);
 	}
 	
-	public void desenhe(Window w, JavaViewport vp){
-		nave.desenhe(w, vp);
-		inimigo.desenhe(w, vp);
-		for (ObjetoGrafico o: objetos){
-			o.desenhe(w, vp);
+	public void desenhe(Window w, Viewport vp){
+		nave.desenhar(w, vp);
+		inimigo.desenhar(w, vp);
+		for (ObjetoDesenhavel o: objetos){
+			o.desenhar(w, vp);
 		}
 		for (Asteroide a: asteroides){
-			a.desenhe(w, vp);
+			a.desenhar(w, vp);
 		}
 	}
 	
@@ -51,7 +51,7 @@ public class Mundo {
 		return nave;
 	}
 
-	public void addObjeto(ObjetoGrafico o){
+	public void addObjeto(ObjetoDesenhavel o){
 		objetos.add(o);
 	}
 	
