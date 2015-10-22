@@ -46,7 +46,7 @@ public class JavaViewport extends JPanel implements KeyListener, Viewport {
 		super.paintComponent(g);
 	}
 
-	public static Ponto2D transformada(Ponto2D p, Window w, Viewport vp) {
+	public Ponto2D getTransformada(Ponto2D p, Window w, Viewport vp) {
 		// TODO implementar!
 		// O objeto "w" possui os dados da Window
 		// o objeto "vp" possui os dados da Viewport
