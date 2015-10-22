@@ -1,6 +1,7 @@
 
 public class Ponto2D {	
 	private Matriz m = new Matriz(1,2);
+	
 	public Ponto2D(){
 	}
 	

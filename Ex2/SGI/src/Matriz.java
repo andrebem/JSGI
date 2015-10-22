@@ -10,7 +10,7 @@ public class Matriz {
 		elementos = new double[numLinhas][numColunas];
 	}
 	
-	public void print(){
+	public void print() {
 		for (int i = 0; i < numLinhas; i++){
 			System.out.print("[");
 			for (int j = 0; j < numColunas; j++){
@@ -29,7 +29,7 @@ public class Matriz {
 		return elementos[i][j];
 	}
 	
-	public Matriz mais(Matriz B){
+	public Matriz somar(Matriz B){
 		Matriz C = new Matriz(numLinhas, numColunas);
 		for (int i = 0; i < numLinhas; i++){
 			for (int j = 0; j < numColunas; j++){
@@ -40,9 +40,9 @@ public class Matriz {
 		return C;
 	}
 
-	public Matriz vezes(Matriz B) {
+	public Matriz multiplicar(Matriz B) {
 		// TODO Implementar!
-		return new Matriz(3,3);
+		return new Matriz(3, 3);
 	}	
 	
 	public int getNumLinhas() {
@@ -53,6 +53,18 @@ public class Matriz {
 		return numColunas;
 	}
 
+	public Matriz getRotacao(double radianos) {
+		//TODO implementar segundo formula
+		return new Matriz(3, 3);
+	}
 
+	public Matriz getTranslacao(double dx, double dy) {
+		//TODO implementar segundo formula
+		return new Matriz(3, 3);
+	}
 	
+	public Matriz getEscalonamento(double sx, double sy) {
+		//TODO implementar segundo formula
+		return new Matriz(3, 3);
+	}
 }
