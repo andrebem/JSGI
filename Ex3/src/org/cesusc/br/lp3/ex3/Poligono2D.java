@@ -1,5 +1,6 @@
-import java.util.ArrayList;
+package org.cesusc.br.lp3.ex3;
 
+import java.util.ArrayList;
 
 public class Poligono2D implements Desenhavel {
 	private ArrayList<Ponto2D> pontos;

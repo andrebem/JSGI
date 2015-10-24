@@ -1,8 +1,10 @@
-import java.security.InvalidParameterException;
+package org.cesusc.br.lp3.ex3;
 
+import java.security.InvalidParameterException;
 
 public class Ponto2D {	
 	private Matriz m = new Matriz(1,3);
+	
 	public Ponto2D(){
 	}
 	
@@ -32,8 +34,10 @@ public class Ponto2D {
 		if (m2.getNumLinhas()!=3 ||m2.getNumColunas()!=3){
 			throw new InvalidParameterException();
 		}
+		
 		Matriz result = this.m.multiplicar(m2);
 		Ponto2D p = new Ponto2D(result.get(0, 0), result.get(0,1));
+		
 		return p;
 	}
 

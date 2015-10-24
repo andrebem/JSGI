@@ -1,3 +1,4 @@
+package org.cesusc.br.lp3.ex3;
 
 public interface Desenhavel {
 	public void desenhar(Window w, Viewport vp);
