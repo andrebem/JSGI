@@ -1,3 +1,4 @@
+package br.org.cesusc.lp3.ex2;
 
 public class Window {
 	public Window(Ponto2D min, Ponto2D max) {

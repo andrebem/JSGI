@@ -1,3 +1,4 @@
+package br.org.cesusc.lp3.ex2;
 
 public final class Linha2D implements Desenhavel {
 	private Ponto2D p1;

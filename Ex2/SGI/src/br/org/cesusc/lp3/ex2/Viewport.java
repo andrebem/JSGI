@@ -1,3 +1,5 @@
+package br.org.cesusc.lp3.ex2;
+
 public interface Viewport {
 
 	public abstract void desenharLinha(Ponto2D p1, Ponto2D p2);

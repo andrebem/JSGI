@@ -1,3 +1,4 @@
+package br.org.cesusc.lp3.ex2;
 
 public class Ponto2D {	
 	private Matriz m = new Matriz(1,2);

@@ -1,3 +1,4 @@
+package br.org.cesusc.lp3.ex2;
 
 public class Matriz {
 	private double[][] elementos;
