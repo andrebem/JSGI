@@ -1,3 +1,4 @@
+package br.org.cesusc.lp3.ex1;
 
 public class Linha2D implements Desenhavel {
 

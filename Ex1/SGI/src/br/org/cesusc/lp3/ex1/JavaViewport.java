@@ -1,3 +1,5 @@
+package br.org.cesusc.lp3.ex1;
+
 import java.awt.*;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
@@ -7,8 +9,6 @@ import java.util.ArrayList;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
-
-
 
 public class JavaViewport extends JPanel implements KeyListener, Viewport {
 
